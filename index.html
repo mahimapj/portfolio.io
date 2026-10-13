@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mahima Joseph | Full Stack Developer</title>
+<meta name="description" content="Portfolio of Mahima Joseph, B.Tech Computer Science graduate and full stack developer working with Python, Flask, JavaScript and SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #eef3f6;
+  --surface: #ffffff;
+  --ink: #12263a;
+  --muted: #526273;
+  --line: #cfdae3;
+  --accent: #0d6e6e;
+  --accent-ink: #ffffff;
+  --mark: #ffd166;
+  --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1b26; --surface: #172736; --ink: #e8f0f6; --muted: #9fb2c3;
+    --line: #2a3f52; --accent: #5ed0c8; --accent-ink: #0f1b26; --mark: #c99a2e;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1b26; --surface: #172736; --ink: #e8f0f6; --muted: #9fb2c3;
+  --line: #2a3f52; --accent: #5ed0c8; --accent-ink: #0f1b26; --mark: #c99a2e;
+}
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--body); }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; }
+.nav .brand { font: 700 18px var(--display); color: var(--ink); text-decoration: none; }
+.nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+.nav ul a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; white-space: nowrap; }
+.nav ul a:hover { color: var(--ink); }
+.theme { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 500 14px var(--body); cursor: pointer; }
+
+.hero { padding: 72px 0 56px; }
+.hero .grid { display: block; }
+.hero h1 { font: 800 clamp(48px, 9vw, 104px)/0.95 var(--display); letter-spacing: -0.03em; margin: 0 0 24px; }
+.hero p.lead { font-size: 20px; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { color: var(--accent); }
+
+.todo { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.todo h2 { font: 700 20px var(--display); margin: 0 0 4px; }
+.todo p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.todo ul { list-style: none; margin: 0; padding: 0; }
+.todo li { border-top: 1px solid var(--line); }
+.todo input { position: absolute; opacity: 0; pointer-events: none; }
+.todo label { display: flex; gap: 12px; align-items: center; padding: 12px 2px; cursor: pointer; font-size: 16px; }
+.box { flex: none; width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 6px; display: grid; place-items: center; transition: background .15s; }
+.box svg { width: 14px; height: 14px; stroke: var(--accent-ink); opacity: 0; fill: none; stroke-width: 3; }
+.todo input:checked + label .box { background: var(--accent); }
+.todo input:checked + label .box svg { opacity: 1; }
+.todo input:checked + label .txt { text-decoration: line-through; color: var(--muted); }
+.todo input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.count { margin-top: 12px; font-size: 14px; color: var(--muted); }
+
+section { padding: 56px 0; border-top: 1px solid var(--line); }
+section h2 { font: 800 clamp(30px, 5vw, 44px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0 0 28px; }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.about p { margin: 0 0 16px; max-width: 34em; }
+.facts { list-style: none; margin: 0; padding: 0; }
+.facts li { padding: 14px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; }
+.facts li:last-child { border-bottom: 1px solid var(--line); }
+.facts span:first-child { color: var(--muted); }
+.facts span:last-child { font-weight: 600; text-align: right; }
+mark { background: var(--mark); color: var(--ink); padding: 0 4px; border-radius: 3px; }
+
+.timeline { border-left: 3px solid var(--accent); padding-left: 24px; }
+.job { margin-bottom: 32px; position: relative; }
+.job::before { content: ""; position: absolute; left: -33px; top: 8px; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+.job h3 { font: 700 22px var(--display); margin: 0; }
+.job .when { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
+.job ul { margin: 0; padding-left: 20px; max-width: 42em; }
+.job li { margin-bottom: 6px; }
+
+.projects { display: grid; gap: 20px; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; }
+.project h3 { font: 700 24px/1.15 var(--display); margin: 0 0 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.tags li { border: 1px solid var(--line); border-radius: 999px; padding: 2px 11px; font-size: 14px; color: var(--muted); }
+.project ul { margin: 0; padding-left: 20px; }
+.project li { margin-bottom: 8px; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 32px; }
+.skills h3 { font: 700 18px var(--display); margin: 0 0 8px; }
+.skills p { margin: 0; color: var(--muted); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.cols h3 { font: 700 22px var(--display); margin: 0 0 12px; }
+.cols ul { margin: 0; padding-left: 20px; }
+.cols li { margin-bottom: 8px; }
+
+.contact p { max-width: 34em; margin: 0 0 24px; font-size: 19px; }
+footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+@media (max-width: 800px) {
+  .hero { padding-top: 40px; }
+  .hero .grid, .about, .project, .cols { grid-template-columns: 1fr; gap: 28px; }
+  .nav ul { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Mahima Joseph</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="theme" id="themeBtn" type="button" aria-label="Switch between light and dark theme">Dark mode</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap grid">
+      <div>
+        <h1>Mahima Joseph</h1>
+        <p class="lead">Full stack developer who builds web apps with Python, Flask, JavaScript and SQL, then tests them with Selenium and PyTest.</p>
+        <div class="btns">
+          <a class="btn primary" href="#projects">See my projects</a>
+          <a class="btn ghost" href="mailto:mahimajjj@gmail.com">Email me</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <div class="about">
+        <div>
+          <p>I am a B.Tech Computer Science Engineering graduate based in Bengaluru, with a CGPA of 9.06/10 and hands-on experience in full stack web development. I build applications across the stack, from responsive React and JavaScript interfaces to Python/Flask and Node.js/Express backends, REST APIs, and both relational and NoSQL databases.</p>
+          <p>My work covers the software development lifecycle in agile environments: developing features, integrating backend components and APIs, writing automated tests with Selenium and PyTest, and troubleshooting application issues. I focus on <mark>maintainable, testable code</mark> that delivers reliable solutions.</p>
+          <p>Beyond web development, I have built NLP and deep learning applications, and I hold certifications in AWS and Google Cloud. I learn new technologies independently and apply them to real problems. I am now seeking a full stack developer role where I can contribute and keep growing.</p>
+        </div>
+        <ul class="facts">
+          <li><span>Degree</span><span>B.Tech, Computer Science Engineering</span></li>
+          <li><span>College</span><span>Vimal Jyothi Engineering College</span></li>
+          <li><span>CGPA</span><span>9.06 / 10</span></li>
+          <li><span>Class XII (CBSE)</span><span>87.05%</span></li>
+          <li><span>Class X (CBSE)</span><span>95.20%</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience and training</h2>
+      <div class="timeline">
+        <div class="job">
+          <h3>Full Stack Intern, Hazercloud Techcake</h3>
+          <p class="when">December 2025 to January 2026</p>
+          <ul>
+            <li>Helped develop a full stack To-Do List web application using Python, Flask and frontend technologies, with complete CRUD functionality.</li>
+            <li>Connected frontend functionality, backend logic, REST APIs and application data handling across the app.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <h3>Python Full Stack Development training, Pyspiders</h3>
+          <p class="when">Bangalore, hands-on course</p>
+          <ul>
+            <li>Covered frontend, backend, database integration, REST APIs and software development practices.</li>
+            <li>Built a to-do list web application with Python, Flask, HTML, CSS, JavaScript, SQL and REST APIs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project">
+          <div>
+            <h3>Full Stack Task Management Application</h3>
+            <ul class="tags"><li>Python</li><li>Flask</li><li>JavaScript</li><li>SQL</li><li>REST API</li></ul>
+          </div>
+          <ul>
+            <li>Designed and built a web app to create, update and delete tasks using CRUD operations.</li>
+            <li>Implemented the backend in Python and Flask, and connected frontend components to application logic and relational database data.</li>
+          </ul>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>Chatmate: A Real-Time Chat Application</h3>
+            <ul class="tags"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li><li>Socket.IO</li></ul>
+          </div>
+          <ul>
+            <li>Built a modern, user-friendly real-time messaging app that helps people connect and communicate in a secure, engaging environment.</li>
+            <li>Used the MERN stack: a responsive React frontend, a Node.js and Express backend, and MongoDB for data storage.</li>
+            <li>Added Socket.IO for real-time communication between users.</li>
+          </ul>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>Dynamic Sign Language to Text and Speech Conversion</h3>
+            <ul class="tags"><li>Python</li><li>OpenCV</li><li>TensorFlow</li><li>Keras</li><li>CNN-GRU</li></ul>
+          </div>
+          <ul>
+            <li>Developed a real-time application for dynamic gesture recognition using OpenCV, TensorFlow/Keras and a hybrid CNN-GRU model.</li>
+            <li>Built the end-to-end pipeline that takes gesture input and produces matching text and speech output.</li>
+          </ul>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>MovieMate: Aspect-Based Sentiment Analysis</h3>
+            <ul class="tags"><li>Python</li><li>BERT</li><li>NLP</li><li>VADER</li><li>Gradio</li></ul>
+          </div>
+          <ul>
+            <li>Developed an NLP application that analyzes movie reviews and identifies sentiment about aspects such as acting, storyline, dialogues, characters and cinematography.</li>
+            <li>Used BERT-based models and VADER sentiment analysis to support aspect-oriented review analysis.</li>
+            <li>Integrated a Gradio interface that presents sentiment results for movie reviews entered by users.</li>
+          </ul>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>Web Application Automation Testing</h3>
+            <ul class="tags"><li>Python</li><li>Selenium</li><li>PyTest</li></ul>
+          </div>
+          <ul>
+            <li>Designed and ran test cases with Selenium WebDriver and PyTest to validate web application functionality.</li>
+            <li>Analyzed results and identified functional defects and issues across user interactions.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><h3>Programming</h3><p>Python, JavaScript, C, SQL</p></div>
+        <div><h3>Web development</h3><p>React, Node.js, Express, MERN stack, Flask, HTML, CSS, JavaScript, REST APIs, CRUD operations, Socket.IO, real-time communication</p></div>
+        <div><h3>Databases</h3><p>MongoDB, SQL, MySQL, RDBMS, SQL scripting</p></div>
+        <div><h3>AI, ML and NLP</h3><p>BERT, VADER, sentiment analysis, aspect-based analysis, TensorFlow, Keras, CNN-GRU, OpenCV, Gradio</p></div>
+        <div><h3>Testing and quality</h3><p>PyTest, Selenium WebDriver, functional and regression testing</p></div>
+        <div><h3>Software development</h3><p>SDLC, software design, OOP, agile development, Salesforce development</p></div>
+        <div><h3>Cloud and tools</h3><p>AWS, Google Cloud, Git, GitHub</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recognition">
+    <div class="wrap cols">
+      <div>
+        <h3>Certifications</h3>
+        <ul>
+          <li>AWS Cloud Practitioner Essentials, AWS</li>
+          <li>Google Cloud Data Analytics, Google Cloud</li>
+          <li>Google Data Analytics Professional Certificate, Google</li>
+          <li>Vertex AI Prompt Design, Google Cloud</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Achievements</h3>
+        <ul>
+          <li>Seminar lead for a web development session for juniors</li>
+          <li>Team leader, SAP Hackfest (state-level selection)</li>
+          <li>Team leader, IIT Madras Shastra AI/ML Challenge</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for full stack developer roles. Send me a message and I'll reply soon.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:mahimajjj@gmail.com">mahimajjj@gmail.com</a>
+        <a class="btn ghost" href="tel:+916235738899">+91 62357 38899</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/mahima-joseph-36a911262" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/mahimapj" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Mahima Joseph, Bengaluru, India</div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById("themeBtn");
+  var root = document.documentElement;
+  function isDark() {
+    var t = root.getAttribute("data-theme");
+    if (t) return t === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function label() { btn.textContent = isDark() ? "Light mode" : "Dark mode"; }
+  btn.addEventListener("click", function () {
+    root.setAttribute("data-theme", isDark() ? "light" : "dark");
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>
